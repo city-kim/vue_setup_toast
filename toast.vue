@@ -61,18 +61,26 @@ watch(closed, (newVal: Ref) => {
 </script>
 
 <template>
-  <Transition>
-    <div class="w-96 mt-3 border border-gray-300 rounded shadow bg-white">
+  <transition
+    leave-from-class="opacity-100"
+    leave-active-class="transition-opacity"
+    leave-to-class="opacity-0"
+  >
+    <div class="w-96 mt-3 border border-gray-300 rounded shadow bg-white"
+      v-if="toastData.isShow"
+    >
       <div class="flex py-2.5 px-3.5 justify-between items-center">
         <h3>{{props.title}}</h3>
         <div class="flex justify-between items-center">
           <p class="text-sm">TODO: 7 second ago</p>
-          <span>X</span>
+          <span class="w-6 stroke-1 cursor-pointer"
+            @click="close()"
+          >X</span>
         </div>
       </div>
       <div class="p-3.5 border-t">
         <p class="text-sm">{{props.contents}}</p>
       </div>
     </div>
-  </Transition>
+  </transition>
 </template>
